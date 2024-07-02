@@ -348,7 +348,7 @@ class Viewer:
 
 
 class Scheduler:
-    number_of_queues = 3
+    number_of_queues = 4
 
     def __init__(self, cpus: list[CPU], memory: Memory, disks: list[Disk]):
         self.counter = 0
@@ -433,7 +433,7 @@ class Scheduler:
 
         blocked_processes_memory = sum([p.size_in_mb for p in blocked_processes_partitions])
         try:
-            if (available_memory + blocked_processes_memory) <= process.size_in_mb:
+            if (available_memory + blocked_processes_memory) >= process.size_in_mb:
                 i = 0
                 while available_memory < process.size_in_mb:
                     partition = blocked_processes_partitions[i]
